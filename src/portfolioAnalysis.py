@@ -1,6 +1,4 @@
 import pandas as pd
-import os
-import re
 
 class PortfolioAnalyzer:
     """
@@ -20,7 +18,7 @@ class PortfolioAnalyzer:
             "issuer": ["Issuer Name", "Issuer", "Security Name", "Description", "Ticker"],
             "currency": ["Currency", "Ccy", "Base Currency", "Trade Currency"]
         }
-        self.rating_cols = self._find_cols("rating")   # list of all rating cols
+        self.rating_cols = self._find_cols("rating")  
         self.sector_col = self._get_primary_col(self._find_cols("sector"))
         self.issuer_col = self._get_primary_col(self._find_cols("issuer"))
         self.currency_col = self._get_primary_col(self._find_cols("currency"))
@@ -145,7 +143,7 @@ class PortfolioAnalyzer:
         """
         results = {}
         for col in self.df.select_dtypes(include="object").columns:
-            if col not in ["Issuer Name", "Description"]:  # skip verbose text if needed
+            if col not in ["Issuer Name", "Description"]:
                 dist = self.df.groupby(col)["Market Value"].sum()
                 results[col] = (dist / dist.sum() * 100).sort_values(ascending=False).head(top_n)
         return results

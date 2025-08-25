@@ -13,7 +13,7 @@ class PortfolioLoader:
         self.clean_dir = self.data_dir / "clean"
         
         self.data_dir.mkdir(parents=True, exist_ok=True)
-        (self.data_dir / "raw").mkdir(exist_ok=True)  # Ensure raw directory exists
+        (self.data_dir / "raw").mkdir(exist_ok=True)
         self.clean_dir.mkdir(exist_ok=True)
 
         if not self.raw_file.exists():
